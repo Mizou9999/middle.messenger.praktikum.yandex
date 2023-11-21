@@ -22,4 +22,4 @@
 
 ## Deploy
 
-[Netlify](<https://www.figma.com/file/BS2k3rVWF8dyl3D0UMO5QH/Chat_external_link-(Copy)?type=design&node-id=46684-2&mode=design>)
+[Netlify](https://bejewelled-gumdrop-de6900.netlify.app/)
