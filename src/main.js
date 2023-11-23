@@ -13,12 +13,13 @@ document.querySelector("#app").innerHTML = `
     </ul>
         
     </nav>
+    
     <div class="home">
         <div class="home__svg-container">
             
         </div>
         <h1 class='home__title'>Yandex.Practicum Messenger</h1>
-        <div class='home__nav'>
+        <nav class='home__nav'>
         <ul>
         <li><a href="/pages/login/login.html">Вход</a></li>
         <li><a href="/pages/registration/registration.html"> Регистрация</a></li>
@@ -27,7 +28,6 @@ document.querySelector("#app").innerHTML = `
         <li><a href="/pages/not_found/400.html"> 400</a></li>
         <li><a href="/pages/not_found/500.html"> 500</a></li>
         </ul>
-        </div>
+        </nav>
     </div>
 `;
-// <img src="/src/images/blob.svg" alt="Random Svg" />
