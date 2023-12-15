@@ -1,8 +1,8 @@
 # Chat App
 
-### A simple we app that allows you to chat
+## A simple we app that allows you to chat
 
-# Development
+## Development
 
 ### start development mode
 

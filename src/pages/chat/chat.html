@@ -1,20 +1,24 @@
 {{> defaultPage title="Chat" }}
 
-<h1>Chat Page</h1>
-<!-- <div class="content">
-  <div class="content__chat-navbar">
-    <div class="content__chat-navbar__profile-container">Профиль <span class="arrow"> > </span></div>
-    <div class="content_chat-navbar__search-container">
-      <input type="search" placeholder="Поиск" />
+<main>
+  <div class="chat-container">
+    <div class="chat-list">
+      <div class="chat-list__title">Chats</div>
+      <div class="chat-list__items"></div>
     </div>
-    <div class="content_chat-navbar__chat-list">
-      <div class="chat-list__chat">
-        <div class="chat-list__chat__avatar"></div>
-        <div class="chat-list__chat__info">
-          <div class="chat-list__chat__info__name">Андрей</div>
-          <div class="chat-list__chat__info__message">Изображение</div>
-        </div>
+
+    <div class="chat-content">
+      <div class="chat-header">
+        <p class="chat-header__avatar">avatar</p>
+        <p class="chat-header__name">Вадим</p>
       </div>
+
+      <div class="messages-container">ChatMessages (Empty for now)</div>
+
+      <div class="message-container">SendMessage (Empty for now)</div>
     </div>
   </div>
-</div> -->
+</main>
+<script type="module">
+  import "./chat.scss";
+</script>

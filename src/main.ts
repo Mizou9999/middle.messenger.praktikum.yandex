@@ -1,6 +1,12 @@
 import "./style.scss";
 
-document.querySelector("#app").innerHTML = `
+import ChatItem from "./components/ChatItem";
+import Button from "./components/Button/Button";
+
+Button();
+const appElement = document.getElementById("app");
+if (appElement) {
+  appElement.innerHTML = `
     <nav class="nav">
     <ul>
         
@@ -31,3 +37,6 @@ document.querySelector("#app").innerHTML = `
         </nav>
     </div>
 `;
+} else {
+  console.log("error appElement");
+}

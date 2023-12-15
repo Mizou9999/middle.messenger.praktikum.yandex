@@ -1,9 +1,11 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import handlebars from "vite-plugin-handlebars";
+import viteHandlebarsPrecompile from "./vite-hb.pricompile";
 
 export default defineConfig({
   root: resolve(__dirname, "src"),
+  assetsInclude: ["**/*.hbs"],
   build: {
     outDir: resolve(__dirname, "dist"),
     rollupOptions: {
@@ -24,8 +26,10 @@ export default defineConfig({
 
   plugins: [
     handlebars({
-      partialDirectory: resolve(__dirname, "src/partials"),
+      partialDirectory: resolve(__dirname, "src/components"),
+      rootDir: resolve(__dirname, "src/components"),
     }),
+    viteHandlebarsPrecompile(),
   ],
 
   resolve: {
