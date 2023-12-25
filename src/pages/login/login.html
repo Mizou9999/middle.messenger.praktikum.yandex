@@ -1,0 +1,19 @@
+{{>defaultPage title="Login" }}
+
+<main>
+  <div class="content">
+    <form action="" method="post" class="content__login-form">
+      <h1 class="content__login-form__title">Вход</h1>
+      <div class="content__login-form__input">{{> input/input label="Логин" name="login" type="text" placeholder="ivanivanov"}}</div>
+      <div class="content__login-form__input">{{> input/input label="Пароль" name='password' type="password" placeholder="••••••••••••"}}</div>
+
+      <div class="content__login-form__buttons-container">
+        {{> button/button text="Войти"}}
+        <p><a href="../registration/registration.html">Создать аккаунт</a></p>
+      </div>
+    </form>
+  </div>
+</main>
+<script type="module">
+  import "./login.scss";
+</script>
