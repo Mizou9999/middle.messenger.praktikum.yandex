@@ -1,7 +1,6 @@
-@import "@/styles/variables.scss";
-@import "@/components/Input/Input.scss";
-@import "@/components/Button/Button.scss";
-
+@import "../../styles/variables.scss";
+@import "../../components/Input/Input.scss";
+@import "../../components/Button/Button.scss";
 .content {
   font-family: $font-roboto;
   display: flex;
