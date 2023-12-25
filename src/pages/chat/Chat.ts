@@ -1,5 +1,3 @@
-import "./Chat.scss";
-
 export default `
 <div class="chat-container">
   <div class="chat-list">
