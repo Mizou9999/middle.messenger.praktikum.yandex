@@ -30,7 +30,7 @@ class ChatPage extends Block {
     const chatHeader = new ChatHeaderComponent({ user_name: "Pavel", img: "https://source.unsplash.com/128x128/?car" });
     const chatContent1 = new ChatContentComponent({
       msg_start_date: "19 июня",
-      msg_content: "Привет! Смотри, тут всплыл интересный кусок лунной космической истории, а я уже устал искать. Ну, пока что, спасибо, пожалуйста!, я уже устал искать. Ну, пока что, спасибо, пожалуйста!",
+      msg_content: "Привет!!! Смотри, тут всплыл интересный кусок лунной космической истории, а я уже устал искать. Ну, пока что, спасибо, пожалуйста!, я уже устал искать. Ну, пока что, спасибо, пожалуйста!",
     });
     const chatContent2 = new ChatContentComponent({
       msg_start_date: "22 июня",
