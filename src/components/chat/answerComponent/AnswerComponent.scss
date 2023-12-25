@@ -1,0 +1,29 @@
+@import "@/styles/variables.scss";
+
+.answer-component {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  border-top: 1px solid #ccc;
+
+  &__input {
+    width: 100%;
+    padding: 20px;
+    input {
+      width: 100%;
+      border: 0;
+      background: $accent-color-lighter;
+      height: 32px;
+      border-radius: 40px;
+      padding: 20px;
+      outline: none;
+    }
+  }
+  .button-send {
+    width: 100px;
+  }
+  .error_message {
+    border: 1px solid $highlight-color;
+  }
+}

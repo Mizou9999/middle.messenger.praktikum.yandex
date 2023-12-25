@@ -1,0 +1,23 @@
+@import "@/styles/variables.scss";
+.chat-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.avatar img {
+  width: 50px; /* Adjust as needed */
+  height: 50px; /* Adjust as needed */
+  border-radius: 50%;
+}
+
+.chat-info {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.chat-meta {
+  text-align: right;
+}

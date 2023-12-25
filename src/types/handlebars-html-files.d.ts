@@ -1,4 +1,7 @@
 declare module "*.hbs" {
-  const content: string;
-  export default content;
+  import { TemplateDelegate } from "handlebars";
+
+  declare const template: TemplateDelegate;
+
+  export default template;
 }

@@ -1,55 +1,51 @@
 import Block from "../../utils/Block";
-import ChatItem from "../../components/ChatItem";
+import template from "./Chat";
+import "./Chat.scss";
+import ChatListComponent from "./components/chatList";
+import ChatHeaderComponent from "../../components/chat/header";
+import ChatContentComponent from "../../components/chat/chatContent";
+import AnswerComponent from "../../components/chat/answerComponent";
+
+// import Button from "../../components/Button";
+// import Input from "../../components/Input";
+type Props = { [key: string]: unknown };
+interface ChatProps extends Props {
+  img: string;
+  user_name: string;
+  last_msg: string;
+  new_msgs: number;
+  date: string;
+  events: {
+    click: () => void;
+  };
+}
 
 class ChatPage extends Block {
-  private chatItem: ChatItem;
-
-  constructor(props: any) {
-    super("main", props);
-
-    console.log("ChatPage constructor is being called");
-
-    // Initialize ChatItem
-    const chatItemProps = {
-      userName: "John Doe",
-      message: "Hello, world!",
-    };
-    this.chatItem = new ChatItem(chatItemProps);
+  constructor(props: ChatProps) {
+    super("div", props);
   }
 
-  compile(): HTMLElement {
-    const chatContainer = document.createElement("div");
-    chatContainer.classList.add("chat-container");
+  render() {
+    const chatList = new ChatListComponent({ props: this.props });
+    const chatHeader = new ChatHeaderComponent({ user_name: "Pavel", img: "https://source.unsplash.com/128x128/?car" });
+    const chatContent1 = new ChatContentComponent({
+      msg_start_date: "19 июня",
+      msg_content: "Привет! Смотри, тут всплыл интересный кусок лунной космической истории, а я уже устал искать. Ну, пока что, спасибо, пожалуйста!, я уже устал искать. Ну, пока что, спасибо, пожалуйста!",
+    });
+    const chatContent2 = new ChatContentComponent({
+      msg_start_date: "22 июня",
+      msg_content: "Вот это кусок лунной космической истории. Очень круто! Ну, пока что, спасибо, пожалуйста!, если ты заинтересовался моим хобби, то тогда можешь посмотреть мою страничку в инстаграме - @meow_>cat ",
+    });
+    const answerContent = new AnswerComponent({});
+    this.children = {
+      chatList: chatList,
+      chatHeader: chatHeader,
+      chatContent1: chatContent1,
+      chatContent2: chatContent2,
+      answerContent: answerContent,
+    };
 
-    const chatList = document.createElement("div");
-    chatList.classList.add("chat-list");
-
-    const chatListTitle = document.createElement("div");
-    chatListTitle.classList.add("chat-list__title");
-    chatListTitle.textContent = "Chats";
-
-    const chatListItems = document.createElement("div");
-    chatListItems.classList.add("chat-list__items");
-
-    // Get content from ChatItem
-    const chatItemContent = this.chatItem.getContent();
-
-    if (chatItemContent) {
-      chatListItems.appendChild(chatItemContent);
-    }
-
-    chatList.appendChild(chatListTitle);
-    chatList.appendChild(chatListItems);
-
-    const chatContent = document.createElement("div");
-    chatContent.classList.add("chat-content");
-
-    // ... add the rest of the chat content structure as needed
-
-    chatContainer.appendChild(chatList);
-    chatContainer.appendChild(chatContent);
-
-    return chatContainer;
+    return this.compile(template, this.props, "page-container");
   }
 }
 

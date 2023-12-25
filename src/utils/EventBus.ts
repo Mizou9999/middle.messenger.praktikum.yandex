@@ -1,5 +1,5 @@
 interface CallbackInterface {
-  (args: any[]): void;
+  (...args: any[]): void;
 }
 
 class EventBus {
@@ -25,7 +25,7 @@ class EventBus {
       throw new Error(`No events with this name: ${eventName}`);
     }
 
-    eventListeners.forEach((listener) => listener(args));
+    eventListeners.forEach((listener) => listener(...args));
   }
 }
 

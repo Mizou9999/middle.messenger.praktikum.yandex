@@ -1,8 +1,7 @@
-import button from "./button.hbs";
-import Handlebars from "handlebars";
+const template = `
+  <button class="button {{class}}" type={{type}}>
+      {{title}}
+  </button>
+`;
 
-const Button = function () {
-  console.log("button");
-};
-
-export default Button;
+export default template;
