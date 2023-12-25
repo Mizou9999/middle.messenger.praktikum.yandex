@@ -1,6 +1,6 @@
 import Block from "../../utils/Block";
 import template from "./Chat";
-import "./Chat.scss";
+
 import ChatListComponent from "./components/chatList";
 import ChatHeaderComponent from "../../components/chat/header";
 import ChatContentComponent from "../../components/chat/chatContent";
