@@ -2,8 +2,13 @@ import Block from "../../../../utils/Block";
 import template from "./Chatlist";
 import ChatComponent from "../../../../components/chat/chatCard";
 
+interface IChatListProps {
+  [key: string]: unknown;
+  // Currently empty, can be expanded in the future if needed
+}
+
 class ChatList extends Block {
-  constructor(props: any) {
+  constructor(props: IChatListProps) {
     super("div", props);
   }
 
