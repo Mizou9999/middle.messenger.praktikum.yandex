@@ -1,8 +1,8 @@
 # Chat App
 
-### A simple we app that allows you to chat
+## A simple we app that allows you to chat
 
-# Development
+## Development
 
 ### start development mode
 
@@ -15,6 +15,12 @@
 ### Build and Run
 
 `npm run start`
+
+### Built With
+
+- **TypeScript**: Used for static type checking, which helps in catching errors early during development.
+- **ESLint**: helping to ensure code quality.
+- **Stylelint**: help avoid errors and enforce conventions in stylesheets.
 
 ## Design
 

@@ -1,0 +1,15 @@
+@import "../../../styles/variables.scss";
+
+.messages-container {
+  max-width: 50%;
+  background-color: $accent-color-lighter;
+  border-radius: 12px;
+  padding: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  &__date {
+    font-size: 12px;
+    text-align: right;
+    margin-top: 20px;
+  }
+}
