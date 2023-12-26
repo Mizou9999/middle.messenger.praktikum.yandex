@@ -118,8 +118,10 @@ class Block {
     if (!nextProps) {
       return;
     }
-
     Object.assign(this.props, nextProps);
+    const oldProps = { ...this.props };
+    Object.assign(this.props, nextProps);
+    this.eventBus().emit(EVENTS.FLOW_CDU, oldProps, this.props);
   }
 
   get element(): HTMLElement | null {
@@ -136,7 +138,7 @@ class Block {
 
     this._addEvents();
   }
-  private _setClassName(className?: string) {
+  public setClassName(className?: string) {
     if (className) {
       this._element?.classList.add(className);
     }
@@ -147,7 +149,7 @@ class Block {
     Object.entries(this.children).forEach(([key, child]) => {
       propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
     });
-    this._setClassName(className);
+    this.setClassName(className);
     const fragment = this._createDocumentElement("template") as HTMLTemplateElement;
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
 

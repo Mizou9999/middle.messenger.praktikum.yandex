@@ -1,7 +1,7 @@
 export default `
 
   <div class="chat-header__info">
-    <img src="{{{img}}}" class="chat-header__avatar"></img>
+    <img alt="Avatar" src="{{{img}}}" class="chat-header__avatar"></img>
     <p class="chat-header__name">{{{user_name}}}</p>
   </div>
   <div class='chat-options'>

@@ -5,13 +5,13 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { validateLogin, validatePassword } from "../../utils/validationutils";
 
-interface LoginPageProps {
+interface ILoginPageProps {
   title: string;
   class?: string;
 }
 
 class LoginPage extends Block {
-  constructor(props: LoginPageProps) {
+  constructor(props: ILoginPageProps) {
     super("div", {
       ...props,
       events: {
@@ -26,7 +26,6 @@ class LoginPage extends Block {
               isFormValid = false;
             }
           });
-
           if (isFormValid) {
             console.log("final login data", this.state);
           } else {
@@ -44,14 +43,20 @@ class LoginPage extends Block {
     if (fieldName === "login") {
       const isValid = validateLogin(value);
       if (!isValid) {
-        console.error("Invalid login");
+        this.children.inputLogin?.setProps({
+          errorMessage: "Invalid Login",
+          class: "error",
+        });
         inputElement.classList.add("error");
         return false;
       }
     } else if (fieldName === "password") {
       const isValid = validatePassword(value);
       if (!isValid) {
-        console.error("Invalid password");
+        this.children.inputPassword?.setProps({
+          errorMessage: "Invalid Password",
+          class: "error",
+        });
         inputElement.classList.add("error");
 
         return false;

@@ -1,9 +1,8 @@
 import Block from "../../utils/Block";
 import template from "./Input";
 
-type Props = { [key: string]: unknown };
-
-interface inputProps extends Props {
+interface IInputProps {
+  [key: string]: unknown;
   label: string;
   type?: string;
   name: string;
@@ -11,10 +10,11 @@ interface inputProps extends Props {
   class?: string;
   placeholder: string;
   events: Record<string, (e: InputEvent) => void>;
+  errorMessage?: string;
 }
 
 class Input extends Block {
-  constructor(props: inputProps) {
+  constructor(props: IInputProps) {
     super("div", props);
   }
 

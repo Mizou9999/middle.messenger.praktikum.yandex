@@ -1,17 +1,16 @@
 import Block from "../../utils/Block";
 import template from "./Button";
 
-type Props = { [key: string]: unknown };
-
-interface buttonProps extends Props {
-  class: string;
+interface IbuttonProps {
+  [key: string]: unknown;
+  class?: string;
   type?: string;
   title: string;
-  events?: Record<string, (e: SubmitEvent) => void>;
+  events?: Record<string, (e: Event) => void>;
 }
 
 class Button extends Block {
-  constructor(props: buttonProps) {
+  constructor(props: IbuttonProps) {
     super("div", props);
   }
 

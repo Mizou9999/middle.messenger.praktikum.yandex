@@ -5,13 +5,13 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { validateLogin, validateEmail, validateName, validatePhone } from "../../utils/validationutils";
 
-interface ProfilePageProps {
+interface IProfilePageProps {
   name: string;
   class?: string;
 }
 
 class ProfilePage extends Block {
-  constructor(props: ProfilePageProps) {
+  constructor(props: IProfilePageProps) {
     super("div", {
       ...props,
       events: {
@@ -44,16 +44,25 @@ class ProfilePage extends Block {
     };
   }
   validateField(fieldName: string, value: string, inputElement: HTMLInputElement): boolean {
+    console.log("childs:", this.children);
     if (fieldName === "email") {
       const isValid = validateEmail(value);
       if (!isValid) {
         console.error("Invalid email");
+        this.children.inputEmail?.setProps({
+          errorMessage: "Invalid email",
+          class: "error",
+        });
         inputElement.classList.add("error");
         return false;
       }
     } else if (fieldName === "login") {
       const isValid = validateLogin(value);
       if (!isValid) {
+        this.children.inputLogin?.setProps({
+          errorMessage: "Invalid Login",
+          class: "error",
+        });
         console.error("Invalid login");
         inputElement.classList.add("error");
         return false;
@@ -62,12 +71,20 @@ class ProfilePage extends Block {
       const isValid = validateName(value);
       if (!isValid) {
         console.error("Invalid name");
+        this.children.inputFirstName?.setProps({
+          errorMessage: "Invalid name",
+          class: "error",
+        });
         inputElement.classList.add("error");
         return false;
       }
     } else if (fieldName === "second_name") {
       const isValid = validateName(value);
       if (!isValid) {
+        this.children.inputSecondName?.setProps({
+          errorMessage: "Invalid second name",
+          class: "error",
+        });
         console.error("Invalid second name");
         inputElement.classList.add("error");
         return false;
@@ -76,6 +93,10 @@ class ProfilePage extends Block {
       const isValid = validatePhone(value);
       if (!isValid) {
         console.error("Invalid phone");
+        this.children.inputPhone?.setProps({
+          errorMessage: "Invalid phone",
+          class: "error",
+        });
         inputElement.classList.add("error");
         return false;
       }

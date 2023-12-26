@@ -1,13 +1,14 @@
 .input-container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
+
   &__label {
     margin-bottom: 1px;
     color: $accent-color;
     font-size: 12px;
   }
   &__input {
-    margin-bottom: 20px;
     width: 280px;
     height: 28px;
     border: 0;

@@ -48,6 +48,10 @@ class RegistrationPage extends Block {
     if (fieldName === "email") {
       const isValid = validateEmail(value);
       if (!isValid) {
+        this.children.inputEmail?.setProps({
+          errorMessage: "Invalid email",
+          class: "error",
+        });
         console.error("Invalid email");
         inputElement.classList.add("error");
         return false;
@@ -55,6 +59,10 @@ class RegistrationPage extends Block {
     } else if (fieldName === "login") {
       const isValid = validateLogin(value);
       if (!isValid) {
+        this.children.inputLogin?.setProps({
+          errorMessage: "Invalid Login",
+          class: "error",
+        });
         console.error("Invalid login");
         inputElement.classList.add("error");
         return false;
@@ -62,6 +70,10 @@ class RegistrationPage extends Block {
     } else if (fieldName === "first_name") {
       const isValid = validateName(value);
       if (!isValid) {
+        this.children.inputFirstName?.setProps({
+          errorMessage: "Invalid name",
+          class: "error",
+        });
         console.error("Invalid name");
         inputElement.classList.add("error");
         return false;
@@ -69,6 +81,10 @@ class RegistrationPage extends Block {
     } else if (fieldName === "second_name") {
       const isValid = validateName(value);
       if (!isValid) {
+        this.children.inputSecondName?.setProps({
+          errorMessage: "Invalid second name",
+          class: "error",
+        });
         console.error("Invalid second name");
         inputElement.classList.add("error");
         return false;
@@ -76,6 +92,10 @@ class RegistrationPage extends Block {
     } else if (fieldName === "password") {
       const isValid = validatePassword(value);
       if (!isValid) {
+        this.children.inputPassword?.setProps({
+          errorMessage: "Invalid password",
+          class: "error",
+        });
         console.error("Invalid password");
         inputElement.classList.add("error");
         return false;
@@ -83,6 +103,10 @@ class RegistrationPage extends Block {
     } else if (fieldName === "phone") {
       const isValid = validatePhone(value);
       if (!isValid) {
+        this.children.inputPhone?.setProps({
+          errorMessage: "Invalid phone",
+          class: "error",
+        });
         console.error("Invalid phone");
         inputElement.classList.add("error");
         return false;
@@ -90,6 +114,10 @@ class RegistrationPage extends Block {
     } else if (fieldName === "repeat_password") {
       const isValid = doesPasswordMatch(value, this.state.password as string);
       if (!isValid) {
+        this.children.inputRepeatPassword?.setProps({
+          errorMessage: "Invalid password-repeat",
+          class: "error",
+        });
         console.error("Invalid password-repeat");
         inputElement.classList.add("error");
         return false;

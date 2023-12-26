@@ -1,6 +1,5 @@
 export default `
-
-    <div class="answer-component__upload">
+    <div class="{{class}}">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M7.18661 13.5L14.7628 5.92389L15.7056 6.8667L8.12942 14.4428L7.18661 13.5Z" fill="#999999"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.70065 16.0141L17.2768 8.43793L18.2196 9.38074L10.6435 16.9569L9.70065 16.0141Z" fill="#999999"/>
@@ -14,13 +13,16 @@ export default `
     </div>
     
     <div class="answer-component__input">
-        <input type="text" name="message" placeholder="Напишите ваше сообщение...">
+        <input  class="{{#if errorMessage}} error {{/if}}" type="text" name="message" placeholder="{{inputPlaceholder}}">
+        {{#if errorMessage}}
+            <span class="error_message">{{errorMessage}}</span>
+        {{/if}}
     </div>   
-    
-    <div class="answer-component__send">
+        
+        <div class="answer-component__send">
         {{{sendButton}}}
-    
-    </div> 
+        
+        </div> 
     
 
 `;

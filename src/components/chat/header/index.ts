@@ -2,13 +2,13 @@ import Block from "../../../utils/Block";
 import template from "./Header";
 import "./Header.scss";
 
-type Props = { [key: string]: unknown };
-interface ChatHeaderProps extends Props {
+interface IChatHeaderProps {
+  [key: string]: unknown;
   img: string;
   user_name: string;
 }
 class Header extends Block {
-  constructor(props: ChatHeaderProps) {
+  constructor(props: IChatHeaderProps) {
     super("div", props);
   }
   render() {

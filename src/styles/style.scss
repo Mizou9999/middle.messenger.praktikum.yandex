@@ -23,3 +23,9 @@ body {
 .error {
   border-bottom: 1px solid $highlight-color !important;
 }
+.error_message {
+  color: $highlight-color;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

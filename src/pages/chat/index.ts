@@ -6,10 +6,8 @@ import ChatHeaderComponent from "../../components/chat/header";
 import ChatContentComponent from "../../components/chat/chatContent";
 import AnswerComponent from "../../components/chat/answerComponent";
 
-// import Button from "../../components/Button";
-// import Input from "../../components/Input";
-type Props = { [key: string]: unknown };
-interface ChatProps extends Props {
+interface IChatProps {
+  [key: string]: unknown;
   img: string;
   user_name: string;
   last_msg: string;
@@ -21,7 +19,7 @@ interface ChatProps extends Props {
 }
 
 class ChatPage extends Block {
-  constructor(props: ChatProps) {
+  constructor(props: IChatProps) {
     super("div", props);
   }
 
@@ -36,7 +34,10 @@ class ChatPage extends Block {
       msg_start_date: "22 июня",
       msg_content: "Вот это кусок лунной космической истории. Очень круто! Ну, пока что, спасибо, пожалуйста!, если ты заинтересовался моим хобби, то тогда можешь посмотреть мою страничку в инстаграме - @meow_>cat ",
     });
-    const answerContent = new AnswerComponent({});
+    const answerContent = new AnswerComponent({
+      class: "answer-component__upload",
+      inputPlaceholder: "Напишите ваше сообщение...",
+    });
     this.children = {
       chatList: chatList,
       chatHeader: chatHeader,

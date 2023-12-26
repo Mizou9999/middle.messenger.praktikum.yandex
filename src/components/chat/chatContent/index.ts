@@ -1,14 +1,15 @@
 import Block from "../../../utils/Block";
 import template from "./ChatContent";
 import "./ChatContent.scss";
-type Props = { [key: string]: unknown };
-interface ChatContentProps extends Props {
+
+interface IChatContentProps {
+  [key: string]: unknown;
   msg_start_date: string;
   msg_content: string;
 }
 
 class ChatContent extends Block {
-  constructor(props: ChatContentProps) {
+  constructor(props: IChatContentProps) {
     super("div", props);
   }
   render() {

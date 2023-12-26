@@ -2,13 +2,13 @@ import Block from "../../../utils/Block";
 import template from "./400";
 import "../not_found.scss";
 
-interface ErrorProps {
+interface IErrorProps {
   title: string;
   class?: string;
 }
 
 export default class ErrorPage4 extends Block {
-  constructor(props: ErrorProps) {
+  constructor(props: IErrorProps) {
     super("div", {
       ...props,
       events: {

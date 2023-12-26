@@ -2,15 +2,15 @@ import Block from "../../../utils/Block";
 import template from "./AnswerComponent";
 import "./AnswerComponent.scss";
 import button from "../../Button";
-type Props = { [key: string]: unknown };
-interface buttonProps extends Props {
+
+interface IAnswerComponentProps {
+  [key: string]: unknown;
   class: string;
-  type?: string;
-  title: string;
-  events?: Record<string, (e: SubmitEvent) => void>;
+  inputPlaceholder: string;
+  errorMessage?: string;
 }
 class AnswerComponent extends Block {
-  constructor(props: buttonProps) {
+  constructor(props: IAnswerComponentProps) {
     super("div", props);
   }
   render() {
@@ -24,9 +24,11 @@ class AnswerComponent extends Block {
           const messageText = message?.value.trim();
           if (!messageText) {
             console.error("Message cannot be empty");
-            message.classList.add("error_message");
+            this.setProps({ errorMessage: "Message cannot be empty" });
+            message.classList.add("error-input");
             return;
           }
+          this.setProps({ errorMessage: "" });
           message.classList.remove("error_message");
           console.log("send Message: ", messageText);
         },

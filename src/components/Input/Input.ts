@@ -1,6 +1,9 @@
 export default `
 <div class="input-container">
-<label class="input-container__label">{{label}}</label>
-<input class="input-container__input" type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" />
+    <label class="input-container__label">{{label}}</label>
+    <input class="input-container__input {{class}}"  type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" />
+    <span class="error_message">{{errorMessage}}</span>
+    
+    
 </div>
 `;

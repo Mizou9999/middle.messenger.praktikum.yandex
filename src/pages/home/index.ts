@@ -2,12 +2,12 @@ import Block from "../../utils/Block";
 import template from "./Home";
 import "./Home.scss";
 
-interface ProfilePageProps {
+interface IProfilePageProps {
   name: string;
 }
 
 class ProfilePage extends Block {
-  constructor(props: ProfilePageProps) {
+  constructor(props: IProfilePageProps) {
     super("div", { ...props });
   }
 
