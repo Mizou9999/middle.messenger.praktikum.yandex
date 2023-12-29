@@ -8,14 +8,7 @@ import AnswerComponent from "../../components/chat/answerComponent";
 
 interface IChatProps {
   [key: string]: unknown;
-  img: string;
-  user_name: string;
-  last_msg: string;
-  new_msgs: number;
-  date: string;
-  events: {
-    click: () => void;
-  };
+  title: string;
 }
 
 class ChatPage extends Block {

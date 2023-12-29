@@ -5,7 +5,7 @@ const METHODS = {
   DELETE: "DELETE",
 };
 type HttpMethod = (typeof METHODS)[keyof typeof METHODS];
-interface RequestOptions {
+export interface RequestOptions {
   method?: HttpMethod;
   headers?: Record<string, string>;
   data?: Record<string, any>;
@@ -77,3 +77,4 @@ class HTTPTransport {
     });
   };
 }
+export default HTTPTransport;

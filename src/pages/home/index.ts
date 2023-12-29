@@ -2,12 +2,12 @@ import Block from "../../utils/Block";
 import template from "./Home";
 import "./Home.scss";
 
-interface IProfilePageProps {
+interface IHomePageProps {
   name: string;
 }
 
-class ProfilePage extends Block {
-  constructor(props: IProfilePageProps) {
+class HomePage extends Block {
+  constructor(props: IHomePageProps) {
     super("div", { ...props });
   }
 
@@ -16,4 +16,4 @@ class ProfilePage extends Block {
   }
 }
 
-export default ProfilePage;
+export default HomePage;
