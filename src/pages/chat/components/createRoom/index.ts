@@ -24,7 +24,11 @@ class CreateRoom extends Block {
             console.error("Input cannot be empty");
             return;
           }
-          ChatsController.create(input.value);
+          ChatsController.create(input.value).then(() => {
+            if (typeof this.props.onClose === "function") {
+              this.props.onClose();
+            }
+          });
         },
       },
     });

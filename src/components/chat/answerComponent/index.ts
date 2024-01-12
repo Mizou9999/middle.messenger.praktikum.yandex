@@ -2,6 +2,8 @@ import Block from "../../../utils/Block";
 import template from "./AnswerComponent";
 import "./AnswerComponent.scss";
 import button from "../../Button";
+import MessagesController from "../../../controllers/MessagesController";
+import store from "../../../utils/Store";
 
 interface IAnswerComponentProps {
   [key: string]: unknown;
@@ -30,7 +32,8 @@ class AnswerComponent extends Block {
           }
           this.setProps({ errorMessage: "" });
           message.classList.remove("error_message");
-          console.log("send Message: ", messageText);
+          const selectedChat = store.getState().selectedChat;
+          MessagesController.sendMessage(selectedChat, messageText);
         },
       },
     });

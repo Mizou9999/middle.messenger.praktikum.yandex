@@ -4,8 +4,9 @@ import "./ChatContent.scss";
 
 interface IChatContentProps {
   [key: string]: unknown;
-  msg_start_date: string;
+  time: string;
   msg_content: string;
+  msg_author?: string;
 }
 
 class ChatContent extends Block {

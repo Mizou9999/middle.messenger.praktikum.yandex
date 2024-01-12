@@ -7,6 +7,7 @@ enum StoreEvents {
 }
 interface State {
   selectedChat?: number;
+  chats?: any[];
 }
 export class Store extends EventBus {
   private state: any = {};
@@ -20,7 +21,7 @@ export class Store extends EventBus {
 }
 const store = new Store();
 
-export function withStore(mapStateToProps: (state: State) => State) {
+export function withStore(mapStateToProps: (state: State) => any) {
   return function wrap(Component: typeof Block) {
     return class WithStore extends Component {
       constructor(props: any) {
@@ -29,8 +30,6 @@ export function withStore(mapStateToProps: (state: State) => State) {
         store.on(StoreEvents.Updated, () => {
           const stateProps = mapStateToProps(store.getState());
           if (isEqual(stateProps, previousState)) {
-            console.log("State hasn't changed");
-
             return;
           }
           previousState = stateProps;

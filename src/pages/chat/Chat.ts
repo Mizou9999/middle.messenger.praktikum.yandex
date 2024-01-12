@@ -10,13 +10,8 @@ export default `
 </div>
 <div class="chat-content">
 {{{chatHeader}}}
-{{{chatContent1}}}
-{{{chatContent2}}}
-
-
+{{{chatContent}}}
 <div class="message-container">{{{answerContent}}}</div>
 </div>
 </div>
 </div>`;
-
-// <div class='search-container'>Search container</div>
