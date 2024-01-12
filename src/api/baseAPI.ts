@@ -1,16 +1,12 @@
-class BaseAPI {
-  create() {
-    throw new Error("Not implemented");
-  }
-  request() {
-    throw new Error("Not implemented");
-  }
-  update() {
-    throw new Error("Not implemented");
-  }
-  delete() {
-    throw new Error("Not implemented");
-  }
-}
+import HTTPTransport from "../utils/fetch";
 
-export default BaseAPI;
+export default class BaseAPI {
+  protected http: HTTPTransport;
+  constructor(endpoint: string) {
+    this.http = new HTTPTransport(endpoint);
+  }
+  public create?(data: unknown): Promise<unknown>;
+  public read?(identifier?: string | number): Promise<unknown>;
+  public update?(identifier: string | number, data: unknown): Promise<unknown>;
+  public delete?(identifier: string | number): Promise<unknown>;
+}

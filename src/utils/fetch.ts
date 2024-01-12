@@ -1,80 +1,86 @@
-const METHODS = {
-  GET: "GET",
-  PUT: "PUT",
-  POST: "POST",
-  DELETE: "DELETE",
-};
-type HttpMethod = (typeof METHODS)[keyof typeof METHODS];
-export interface RequestOptions {
-  method?: HttpMethod;
-  headers?: Record<string, string>;
-  data?: Record<string, any>;
-  timeout?: number;
+import BaseUrl from "../api/BaseURL";
+
+export enum Method {
+  Get = "Get",
+  Post = "Post",
+  Put = "Put",
+  Patch = "Patch",
+  Delete = "Delete",
 }
 
-class HTTPTransport {
-  queryStringify(data: Record<string, any>): string {
-    return !data
-      ? ""
-      : "?" +
-          Object.keys(data)
-            .map((key) => key + "=" + data[key])
-            .join("&");
+type Options = {
+  method: string;
+  data?: unknown;
+};
+
+type HTTPMethod = <R = unknown>(url: string, data?: unknown) => Promise<R>;
+
+export default class HTTPTransport {
+  protected endpoint: string;
+
+  constructor(endpoint: string) {
+    this.endpoint = `${BaseUrl}${endpoint}`;
   }
 
-  get = (url: string, options: RequestOptions = {}) => {
-    const fullUrl = options.data ? `${url}?${this.queryStringify(options.data)}` : url;
-    const getOptions = { ...options, method: METHODS.GET };
-    return this.request(fullUrl, getOptions, options.timeout);
-  };
+  public get: HTTPMethod = (url = "/") => this.request(this.endpoint + url);
 
-  post = (url: string, options: RequestOptions = {}) => {
-    const postOptions = { ...options, method: METHODS.POST };
-    return this.request(url, postOptions);
-  };
+  public post: HTTPMethod = (url, data) =>
+    this.request(this.endpoint + url, {
+      method: Method.Post,
+      data,
+    });
 
-  put = (url: string, options: RequestOptions = {}) => {
-    const putOptions = { ...options, method: METHODS.PUT };
-    return this.request(url, putOptions);
-  };
+  public put: HTTPMethod = (url, data) =>
+    this.request(this.endpoint + url, {
+      method: Method.Put,
+      data,
+    });
 
-  delete = (url: string, options: RequestOptions = {}) => {
-    const deleteOptions = { ...options, method: METHODS.DELETE };
-    return this.request(url, deleteOptions);
-  };
+  public patch: HTTPMethod = (url, data) =>
+    this.request(this.endpoint + url, {
+      method: Method.Patch,
+      data,
+    });
 
-  request = (url: string, options: RequestOptions, timeout = 5000) => {
-    const { method, headers, data } = options;
-    const defaultHeaders = {
-      "Content-Type": "application/json",
-    };
-    const combinedHeaders = { ...defaultHeaders, ...headers };
+  public delete: HTTPMethod = (url, data) =>
+    this.request(this.endpoint + url, {
+      method: Method.Delete,
+      data,
+    });
+
+  private request<Response>(url: string, options: Options = { method: Method.Get }): Promise<Response> {
+    const { method, data } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open(method || METHODS.GET, url);
-      if (headers) {
-        for (const [header, value] of Object.entries(combinedHeaders)) {
-          xhr.setRequestHeader(header, value);
+      xhr.open(method, url);
+
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          console.log(xhr.status, "XHR STATUS");
+          if (xhr.status < 400) {
+            resolve(xhr.response);
+          } else {
+            reject(xhr.response);
+          }
         }
-      }
-      xhr.onload = function () {
-        resolve(xhr);
       };
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
-      if (method === "GET") {
-        console.log("sending");
+
+      xhr.onabort = () => reject(xhr.response);
+      xhr.onerror = () => reject(xhr.response);
+      xhr.ontimeout = () => reject(xhr.response);
+
+      xhr.withCredentials = true;
+      xhr.responseType = "json";
+
+      if (method === Method.Get || !data) {
         xhr.send();
+      } else if (data instanceof FormData) {
+        xhr.send(data);
       } else {
+        xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(data));
       }
-      setTimeout(() => {
-        xhr.abort();
-        reject(new Error("Request timed out"));
-      }, timeout);
     });
-  };
+  }
 }
-export default HTTPTransport;

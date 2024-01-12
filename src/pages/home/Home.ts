@@ -1,9 +1,9 @@
 export default `
 <nav class="nav">
     <ul>
-        <li><a href="/login">Вход</a></li>
+        <li><a href="/sign-in">Вход</a></li>
         <li><a href="/registration"> Регистрация</a></li>
-        <li><a href="/chat"> Список чатов</a></li>
+        <li><a href="/messenger"> Список чатов</a></li>
         <li><a href="/settings"> Настройки пользователя</a></li>
         <li><a href="/400"> 400</a></li>
         <li><a href="/500"> 500</a></li>
@@ -18,9 +18,9 @@ export default `
         <h1 class='home__title'>Yandex.Practicum Messenger</h1>
         <nav class='home__nav'>
         <ul>
-        <li><a href="login">Вход</a></li>
+        <li><a href="sign-in">Вход</a></li>
         <li><a href="/registration"> Регистрация</a></li>
-        <li><a href="/chat"> Список чатов</a></li>
+        <li><a href="/messenger"> Список чатов</a></li>
         <li><a href="/settings"> Настройки пользователя</a></li>
         <li><a href="/400"> 400</a></li>
         <li><a href="/500"> 500</a></li>

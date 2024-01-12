@@ -1,0 +1,29 @@
+@import "../../../../styles/variables.scss";
+.create-room {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid $primary-color;
+  border-radius: 10px;
+  &__input {
+    width: 100%;
+    padding: 20px;
+
+    input {
+      width: 100%;
+      border: 0;
+      background: $accent-color-lighter;
+      height: 32px;
+      border-radius: 10px;
+      padding: 10px;
+      outline: none;
+    }
+  }
+  & button {
+    margin-top: 10px;
+  }
+}

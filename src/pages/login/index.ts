@@ -4,6 +4,7 @@ import "./login.scss";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { validateLogin, validatePassword } from "../../utils/validationutils";
+import AuthController from "../../controllers/AuthController";
 
 interface ILoginPageProps {
   title: string;
@@ -27,6 +28,14 @@ class LoginPage extends Block {
             }
           });
           if (isFormValid) {
+            const login = (document.querySelector("input[name='login']") as HTMLInputElement).value;
+            const password = (document.querySelector("input[name='password']") as HTMLInputElement).value;
+            // some how TS show error with this.state
+            const signinData = {
+              login: login,
+              password: password,
+            };
+            AuthController.signin(signinData);
             console.log("final login data", this.state);
           } else {
             console.log("Error login", this.state);

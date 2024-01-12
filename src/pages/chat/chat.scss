@@ -23,6 +23,7 @@
     font-weight: bold;
     margin-bottom: 23px;
     cursor: pointer;
+    margin-bottom: 22px;
   }
   & .search-container {
     width: 100%;
@@ -115,4 +116,12 @@
   height: 1px;
   background-color: #999999;
   margin-bottom: 20px;
+}
+.chat-create-button {
+  margin-bottom: 12px;
+}
+#chatRoomName {
+  margin-bottom: 12px;
+  position: absolute;
+  top: 0;
 }

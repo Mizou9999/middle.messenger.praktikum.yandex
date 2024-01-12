@@ -1,16 +1,17 @@
 import "./styles/style.scss";
 import * as pages from "./pages/index";
 import Router from "./router/router";
+import AuthController from "./controllers/AuthController";
+import ChatsController from "./controllers/ChatsController";
 
-const router = new Router("#app");
-
-router
-  .use("/", () => new pages.HomePage({ name: "homePage Page" }))
+Router.use("/", () => new pages.HomePage({ name: "homePage Page" }))
   .use("/settings", () => new pages.ProfilePage({ name: "Profile Page" }))
-  .use("/login", () => new pages.LoginPage({ title: "Вход" }))
+  .use("/sign-in", () => new pages.LoginPage({ title: "Вход" }))
   .use("/registration", () => new pages.RegistrationPage({ title: "Регистрация" }))
   .use("/400", () => new pages.ErrorPage400({ title: "400" }))
   .use("/500", () => new pages.ErrorPage500({ title: "500" }))
-  .use("/chat", () => new pages.ChatPage({ title: "Chat Page" }));
+  .use("/messenger", () => new pages.ChatPage({ title: "Chat Page" }));
 
-router.start();
+await AuthController.fetchUser();
+await ChatsController.fetchChats();
+Router.start();

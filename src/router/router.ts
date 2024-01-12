@@ -18,7 +18,9 @@ class Router {
 
     Router.__instance = this;
   }
-
+  static getInstance() {
+    return this.__instance;
+  }
   use(pathname: string, blockFactory: () => Block) {
     const route = new Route(pathname, blockFactory, { rootQuery: this._rootQuery });
     this.routes.push(route);
@@ -62,4 +64,4 @@ class Router {
   }
 }
 
-export default Router;
+export default new Router("#app");

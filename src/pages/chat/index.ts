@@ -2,9 +2,11 @@ import Block from "../../utils/Block";
 import template from "./Chat";
 import "./chat.scss";
 import ChatListComponent from "./components/chatList";
+import CreateRoom from "./components/createRoom";
 import ChatHeaderComponent from "../../components/chat/header";
 import ChatContentComponent from "../../components/chat/chatContent";
 import AnswerComponent from "../../components/chat/answerComponent";
+import Button from "../../components/Button";
 
 interface IChatProps {
   [key: string]: unknown;
@@ -12,8 +14,14 @@ interface IChatProps {
 }
 
 class ChatPage extends Block {
+  private _createRoomVisible: boolean;
   constructor(props: IChatProps) {
     super("div", props);
+    this._createRoomVisible = false;
+  }
+  createRoomVisible(visible: boolean) {
+    this._createRoomVisible = visible;
+    this.setProps({});
   }
 
   render() {
@@ -31,12 +39,28 @@ class ChatPage extends Block {
       class: "answer-component__upload",
       inputPlaceholder: "Напишите ваше сообщение...",
     });
+    const createRoom = new CreateRoom({ class: "create-room", title: "Создать чат", inputPlaceholder: "Название чата" });
+
+    const createButton = new Button({
+      title: this._createRoomVisible ? "Скрыть Чат" : "Создать Чат",
+      class: "chat-create-button",
+      type: "submit",
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          this.createRoomVisible(!this._createRoomVisible);
+        },
+      },
+    });
+    this._createRoomVisible ? createRoom.show() : createRoom.hide();
     this.children = {
       chatList: chatList,
       chatHeader: chatHeader,
       chatContent1: chatContent1,
       chatContent2: chatContent2,
       answerContent: answerContent,
+      createButton: createButton,
+      createRoom: createRoom,
     };
 
     return this.compile(template, this.props, "page-container");
