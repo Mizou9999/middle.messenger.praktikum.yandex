@@ -40,29 +40,32 @@ class ChatPage extends Block {
 
   render() {
     const chatList = new ChatListComponent({ props: this.props });
-    const chatHeader = new ChatHeaderComponent({ user_name: "Pavel", img: "https://source.unsplash.com/128x128/?car" });
 
     const activeChatID = store.getState().selectedChat;
     const activeChat = store.getState().chats.find((chat: IChatProps) => chat.id === activeChatID);
+    let chatHeader;
+    console.log("add remove user from chat");
+
     let chatContentComponent;
-    // if user id is the same who sent the message edit the message position in css so it looks like i am the one who sent
-    console.log(store.getState().user.id);
 
     let messages = store.getState().messages || [];
     let activeChatMessages = messages[activeChatID] || [];
-    console.log("Messages for chat ID", activeChatID, ":", activeChatMessages);
-
-    if (activeChat && activeChat.last_message) {
-      chatContentComponent = new ChatContentComponent({
-        time: new Date(activeChat.last_message.time).toLocaleString(),
-        msg_content: activeChat.title,
-        activeChatMessages: activeChatMessages,
-      });
-    } else {
-      chatContentComponent = new ChatContentComponent({
-        time: "",
-        msg_content: "Please select or create a new chat",
-      });
+    // set default chatContent and headers ( если пусто)
+    chatHeader = new ChatHeaderComponent({ chat_room_title: "empty ROOM", img: "https://source.unsplash.com/128x128/?car" });
+    chatContentComponent = new ChatContentComponent({
+      time: "",
+      msg_content: "Please select or create a new chat",
+      activeChatMessages: [],
+    });
+    if (activeChat) {
+      chatHeader = new ChatHeaderComponent({ chat_room_title: activeChat.title, img: "https://source.unsplash.com/128x128/?car" });
+      if (activeChat.last_message) {
+        chatContentComponent = new ChatContentComponent({
+          time: new Date(activeChat.last_message.time).toLocaleString(),
+          msg_content: activeChat.title,
+          activeChatMessages: activeChatMessages,
+        });
+      }
     }
 
     const answerContent = new AnswerComponent({

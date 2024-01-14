@@ -5,7 +5,7 @@ import "./Header.scss";
 interface IChatHeaderProps {
   [key: string]: unknown;
   img: string;
-  user_name: string;
+  chat_room_title: string;
 }
 class Header extends Block {
   constructor(props: IChatHeaderProps) {

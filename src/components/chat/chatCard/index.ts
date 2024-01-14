@@ -1,11 +1,7 @@
 import Block from "../../../utils/Block";
 import template from "./Chat";
 import "./Chat.scss";
-interface IChatMessage {
-  content?: string;
-  id: string;
-  time: string;
-}
+import { IChatMessage } from "../../../types/types";
 export interface IChatProps {
   [key: string]: unknown;
   avatar: string;

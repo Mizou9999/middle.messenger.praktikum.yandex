@@ -33,3 +33,8 @@ export interface ChatInfo {
     content: string;
   };
 }
+export interface IChatMessage {
+  content?: string;
+  id: string;
+  time: string;
+}
