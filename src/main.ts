@@ -37,5 +37,5 @@ async function initializeApplication() {
 }
 
 // Initialize the application
-await initializeApplication();
+initializeApplication();
 setupRoutes();
