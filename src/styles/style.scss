@@ -1,0 +1,31 @@
+@import "./variables.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#app {
+  background-color: $white-color;
+  font-family: $font-roboto;
+  color: $primary-color;
+  height: 100%;
+}
+body {
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
+}
+.page-container {
+  width: 100%;
+  height: 100%;
+}
+.error {
+  border-bottom: 1px solid $highlight-color !important;
+}
+.error_message {
+  color: $highlight-color;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

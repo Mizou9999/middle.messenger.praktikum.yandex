@@ -1,7 +1,6 @@
-@import "@/styles/variables.scss";
-@import "@/partials/input/input.scss";
-@import "@/partials/button/button.scss";
-
+@import "../../styles/variables.scss";
+@import "../../components/Input/Input.scss";
+@import "../../components/Button/Button.scss";
 .content {
   font-family: $font-roboto;
   display: flex;
@@ -48,8 +47,9 @@
       margin-top: auto;
       margin-bottom: 10px;
       p {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: normal;
+        margin: 12px;
         cursor: pointer;
         a {
           text-decoration: none;
