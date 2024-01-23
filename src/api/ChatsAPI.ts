@@ -1,7 +1,7 @@
-import BaseAPI from "./BaseAPI";
+import baseAPI from "./BaseAPI";
 import { User, ChatInfo } from "../types/types";
 
-export class ChatsAPI extends BaseAPI {
+export class ChatsAPI extends baseAPI {
   constructor() {
     super("/chats");
   }
