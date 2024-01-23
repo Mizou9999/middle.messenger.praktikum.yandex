@@ -1,7 +1,11 @@
 export default `
 <div class="chat-container">
 <div class="chat-list">
-<span class='title'>Профиль ></span>
+<div class="header-container">
+
+<button  class='title profile'> {{{profileBtn}}}</button>
+
+</div>
 {{{createButton}}}
 {{{createRoom}}}
 

@@ -15,6 +15,8 @@ export class AuthAPI extends BaseAPI {
   }
 
   read(): Promise<User> {
+    console.log("read");
+
     return this.http.get("/user");
   }
 

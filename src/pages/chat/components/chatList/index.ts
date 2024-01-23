@@ -14,10 +14,8 @@ class ChatList extends Block {
   }
 
   render() {
-    const chatList = store.getState().chats;
-    this.children.chatList = chatList.map((chat: IChatProps) => {
+    this.children.chatList = store.getState().chats.map((chat: IChatProps) => {
       const lastMessageContent = chat.last_message ? chat.last_message.content : "";
-
       return new ChatCard({
         avatar: chat.avatar || "https://source.unsplash.com/128x128/?random",
         created_by: chat.created_by,

@@ -9,6 +9,8 @@ import AnswerComponent from "../../components/chat/answerComponent";
 import Button from "../../components/Button";
 import store, { withStore } from "../../utils/Store";
 
+import router from "../../router/router";
+
 interface IChatProps {
   [key: string]: unknown;
   title: string;
@@ -41,20 +43,31 @@ class ChatPage extends Block {
   render() {
     const chatList = new ChatListComponent({ props: this.props });
 
+    const profileBtn = new Button({
+      title: "Профиль",
+      class: "profile",
+      type: "submit",
+      events: {
+        click: () => {
+          // go to profile page
+          router.go("/settings");
+          console.log("click profile");
+        },
+      },
+    });
     const activeChatID = store.getState().selectedChat;
     const activeChat = store.getState().chats.find((chat: IChatProps) => chat.id === activeChatID);
     let chatHeader;
-    console.log("add remove user from chat");
-
     let chatContentComponent;
-
     let messages = store.getState().messages || [];
     let activeChatMessages = messages[activeChatID] || [];
+    // save current chat id in store
+    store.set("selectedChat", activeChatID);
     // set default chatContent and headers ( если пусто)
-    chatHeader = new ChatHeaderComponent({ chat_room_title: "empty ROOM", img: "https://source.unsplash.com/128x128/?car" });
+    chatHeader = new ChatHeaderComponent({ chat_room_title: "Empty Room", img: "https://source.unsplash.com/128x128/?car" });
     chatContentComponent = new ChatContentComponent({
       time: "",
-      msg_content: "Please select or create a new chat",
+      msg_content: "Select or create a new chat",
       activeChatMessages: [],
     });
     if (activeChat) {
@@ -93,6 +106,7 @@ class ChatPage extends Block {
       answerContent: answerContent,
       createButton: createButton,
       createRoom: createRoom,
+      profileBtn: profileBtn,
     };
 
     return this.compile(template, this.props, "page-container");

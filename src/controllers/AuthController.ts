@@ -1,7 +1,7 @@
 import API, { AuthAPI } from "../api/authAPI";
 import router from "../router/router";
 import store from "../utils/Store";
-
+import ChatsController from "./ChatsController";
 import MessagesController from "./MessagesController";
 import { SigninData, SignupData } from "../types/types";
 
@@ -16,7 +16,7 @@ export class AuthController {
     try {
       await this.api.signin(data);
       await this.fetchUser();
-      console.log("signing in ", store);
+      await ChatsController.fetchChats();
       router.go("/messenger");
     } catch (e: any) {
       console.error(e);

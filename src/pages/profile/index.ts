@@ -3,14 +3,22 @@ import template from "./Profile";
 import "./settings.scss";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import Avatar from "./components/avatarComponent";
 import { validateLogin, validateEmail, validateName, validatePhone } from "../../utils/validationutils";
+import store from "../../utils/Store";
+import AuthController from "../../controllers/AuthController";
+import UserController from "../../controllers/UserController";
+import router from "../../router/router";
 
 interface IProfilePageProps {
   name: string;
   class?: string;
 }
-
+interface IChatListProps {
+  [key: string]: unknown;
+}
 class ProfilePage extends Block {
+  state: IChatListProps;
   constructor(props: IProfilePageProps) {
     super("div", {
       ...props,
@@ -28,7 +36,7 @@ class ProfilePage extends Block {
           });
 
           if (isFormValid) {
-            console.log("final login data", this.state);
+            UserController.changeUserData(this.state as any);
           } else {
             console.log("Error login", this.state);
           }
@@ -44,7 +52,6 @@ class ProfilePage extends Block {
     };
   }
   validateField(fieldName: string, value: string, inputElement: HTMLInputElement): boolean {
-    console.log("childs:", this.children);
     if (fieldName === "email") {
       const isValid = validateEmail(value);
       if (!isValid) {
@@ -104,14 +111,40 @@ class ProfilePage extends Block {
     inputElement.classList.remove("error");
     return true;
   }
+  componentDidMount() {
+    let userData;
+    if (store.getState().user) {
+      userData = store.getState().user;
+    } else {
+      AuthController.fetchUser();
+      userData = store.getState().user;
+    }
+
+    if (userData) {
+      this.children.inputEmail.setProps({ value: userData.email });
+      this.children.inputLogin.setProps({ value: userData.login });
+      this.children.inputFirstName.setProps({ value: userData.first_name });
+      this.children.inputSecondName.setProps({ value: userData.second_name });
+      this.children.inputPhone.setProps({ value: userData.phone });
+      this.state = userData;
+    }
+  }
   handleFocusOut = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const fieldName = target.name;
     const value = target.value;
     this.validateField(fieldName, value, target);
-    this.state[fieldName] = target.value;
+    this.state[fieldName] = value;
   };
+  handleLogout() {
+    AuthController.logout();
+  }
   render() {
+    console.log(this.props);
+
+    const avatarComponent = new Avatar({
+      avatarUrl: store.getState().user?.avatar,
+    });
     const submitButton = new Button({
       class: "button-submit",
       type: "submit",
@@ -172,7 +205,26 @@ class ProfilePage extends Block {
       placeholder: "+7 (909) 967 30 30",
       label: "Телефон",
     });
-
+    const logout = new Button({
+      title: "Выход",
+      class: "logout",
+      type: "submit",
+      events: {
+        click: () => {
+          this.handleLogout();
+        },
+      },
+    });
+    const backBtn = new Button({
+      title: "Назад",
+      class: "back",
+      type: "submit",
+      events: {
+        click: () => {
+          router.go("/messenger");
+        },
+      },
+    });
     this.children = {
       inputEmail: inputEmail,
       inputLogin: inputLogin,
@@ -180,6 +232,9 @@ class ProfilePage extends Block {
       inputSecondName: inputSecondName,
       inputPhone: inputPhone,
       submitButton: submitButton,
+      avatarComponent: avatarComponent,
+      logout: logout,
+      backBtn: backBtn,
     };
 
     return this.compile(template, this.props, "page-container");

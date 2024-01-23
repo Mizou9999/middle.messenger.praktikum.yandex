@@ -10,8 +10,12 @@ interface ILoginPageProps {
   title: string;
   class?: string;
 }
+interface ILoginPageState {
+  [key: string]: string;
+}
 
 class LoginPage extends Block {
+  state: ILoginPageState;
   constructor(props: ILoginPageProps) {
     super("div", {
       ...props,
@@ -30,13 +34,12 @@ class LoginPage extends Block {
           if (isFormValid) {
             const login = (document.querySelector("input[name='login']") as HTMLInputElement).value;
             const password = (document.querySelector("input[name='password']") as HTMLInputElement).value;
-            // some how TS show error with this.state
+            // TS show error with this.state
             const signinData = {
               login: login,
               password: password,
             };
             AuthController.signin(signinData);
-            console.log("final login data", this.state);
           } else {
             console.log("Error login", this.state);
           }

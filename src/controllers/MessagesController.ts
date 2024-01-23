@@ -90,6 +90,4 @@ class MessagesController {
   }
 }
 
-const controller = new MessagesController();
-
-export default controller;
+export default new MessagesController();

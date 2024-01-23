@@ -17,13 +17,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  & .title {
-    align-self: flex-end;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 23px;
-    cursor: pointer;
-    margin-bottom: 22px;
+  .header-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    & .title {
+      align-self: flex-end;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 23px;
+      cursor: pointer;
+      margin-bottom: 22px;
+    }
+    .logout {
+      color: $highlight-color;
+      cursor: pointer;
+      background: none;
+    }
+    .profile {
+      background: none;
+      cursor: pointer;
+      color: $primary-color;
+    }
   }
   & .search-container {
     width: 100%;

@@ -1,0 +1,26 @@
+@import "../../../styles/variables.scss";
+.chat-options {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+  input {
+    width: 200px;
+    border: 0;
+    background: $accent-color-lighter;
+    height: 32px;
+    border-radius: 6px;
+    padding: 10px;
+    outline: none;
+  }
+  .add-user {
+    background-color: rgb(64, 162, 55);
+    width: 80px;
+    height: 32px;
+  }
+  .delete-user {
+    background-color: $highlight-color;
+    height: 32px;
+    width: 80px;
+  }
+}

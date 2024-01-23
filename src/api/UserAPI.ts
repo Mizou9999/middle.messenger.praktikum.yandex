@@ -1,33 +1,32 @@
 import BaseAPI from "./BaseAPI";
-
+export interface User {
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  login: string;
+  email: string;
+  phone: string;
+}
 export class UserAPI extends BaseAPI {
   constructor() {
     super("/user");
   }
 
-  public create?(): Promise<unknown> {
-    throw new Error("Method not implemented.");
+  public async changeUserData(data: User) {
+    return await this.http.put("/profile", data);
   }
 
-  public read?(): Promise<unknown> {
-    throw new Error("Method not implemented.");
+  public async changeUserAvatar(data: FormData) {
+    return await this.http.put("/profile/avatar", data);
   }
 
-  public update?(): Promise<unknown> {
-    throw new Error("Method not implemented.");
-  }
+  // public async changeUserPassword(data: UserPasswordData) {
+  //   return await this.http.put('/password', { data });
+  // }
 
-  public delete?(): Promise<unknown> {
-    throw new Error("Method not implemented.");
-  }
-
-  updateAvatar(avatar: FormData) {
-    return this.http.put("/profile/avatar", avatar);
-  }
-
-  changeProfile(profile: {}) {
-    return this.http.put("/profile", profile);
-  }
+  // public async getUser(data: User) {
+  //   return await this.http.get(`/${data.id}`);
+  // }
 }
 
 export default new UserAPI();
