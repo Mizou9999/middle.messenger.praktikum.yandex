@@ -1,4 +1,4 @@
-import BaseAPI from "./BaseAPI";
+import baseAPI from "./BaseAPI";
 export interface User {
   first_name: string;
   second_name: string;
@@ -7,7 +7,7 @@ export interface User {
   email: string;
   phone: string;
 }
-export class UserAPI extends BaseAPI {
+export class UserAPI extends baseAPI {
   constructor() {
     super("/user");
   }
