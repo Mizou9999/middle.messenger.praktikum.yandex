@@ -1,4 +1,4 @@
-import baseAPI from "./BaseAPI";
+import baseAPI from "./baseAPI";
 import { User, ChatInfo } from "../types/types";
 
 export class ChatsAPI extends baseAPI {

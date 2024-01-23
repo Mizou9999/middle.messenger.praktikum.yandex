@@ -1,4 +1,4 @@
-import baseAPI from "./BaseAPI";
+import baseAPI from "./baseAPI";
 export interface User {
   first_name: string;
   second_name: string;

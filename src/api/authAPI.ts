@@ -1,4 +1,4 @@
-import baseAPI from "./BaseAPI";
+import baseAPI from "./baseAPI";
 import { SigninData, SignupData, User } from "../types/types";
 
 export class AuthAPI extends baseAPI {
