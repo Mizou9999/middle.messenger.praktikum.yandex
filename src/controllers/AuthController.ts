@@ -20,6 +20,11 @@ export class AuthController {
       router.go("/messenger");
     } catch (e: any) {
       console.error(e);
+      if (e.reason && e.reason === "User already in system") {
+        console.log("User already in system");
+
+        router.go("/messenger");
+      }
     }
   }
 
