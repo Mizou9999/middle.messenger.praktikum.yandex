@@ -21,6 +21,7 @@ export class AuthController {
     } catch (e: any) {
       console.error(e);
       if (e.reason && e.reason === "User already in system") {
+        console.log("already logged");
         router.go("/messenger");
       }
     }
