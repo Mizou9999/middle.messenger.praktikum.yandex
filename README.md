@@ -30,4 +30,4 @@
 
 ## Deploy
 
-[Netlify](https://bejewelled-gumdrop-de6900.netlify.app/)
+[Netlify](https://deploy-preview-3--bejewelled-gumdrop-de6900.netlify.app/)
