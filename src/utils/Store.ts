@@ -8,11 +8,14 @@ enum StoreEvents {
 interface State {
   selectedChat?: number;
   chats?: any[];
+  user?: { id: number };
+  messages?: [];
 }
 export class Store extends EventBus {
   private state: any = {};
   public set(keypath: string, data: unknown) {
     set(this.state, keypath, data);
+
     this.emit(StoreEvents.Updated, this.getState());
   }
   public getState() {

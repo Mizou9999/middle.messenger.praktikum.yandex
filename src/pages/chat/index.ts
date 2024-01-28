@@ -51,7 +51,6 @@ class ChatPage extends Block {
         click: () => {
           // go to profile page
           router.go("/settings");
-          console.log("click profile");
         },
       },
     });
@@ -59,16 +58,15 @@ class ChatPage extends Block {
     const activeChat = store.getState().chats.find((chat: IChatProps) => chat.id === activeChatID);
     let chatHeader;
     let chatContentComponent;
-    let messages = store.getState().messages || [];
-    let activeChatMessages = messages[activeChatID] || [];
+
     // save current chat id in store
     store.set("selectedChat", activeChatID);
     // set default chatContent and headers ( если пусто)
+
     chatHeader = new ChatHeaderComponent({ chat_room_title: "Empty Room", img: "https://source.unsplash.com/128x128/?car" });
     chatContentComponent = new ChatContentComponent({
       time: "",
       msg_content: "Select or create a new chat",
-      activeChatMessages: [],
     });
     if (activeChat) {
       chatHeader = new ChatHeaderComponent({ chat_room_title: activeChat.title, img: "https://source.unsplash.com/128x128/?car" });
@@ -76,7 +74,6 @@ class ChatPage extends Block {
         chatContentComponent = new ChatContentComponent({
           time: new Date(activeChat.last_message.time).toLocaleString(),
           msg_content: activeChat.title,
-          activeChatMessages: activeChatMessages,
         });
       }
     }

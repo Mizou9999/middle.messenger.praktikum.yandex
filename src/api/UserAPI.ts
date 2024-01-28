@@ -13,11 +13,21 @@ export class UserAPI extends baseAPI {
   }
 
   public async changeUserData(data: User) {
-    return await this.http.put("/profile", data);
+    try {
+      return await this.http.put("/profile", data);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   public async changeUserAvatar(data: FormData) {
-    return await this.http.put("/profile/avatar", data);
+    try {
+      return await this.http.put("/profile/avatar", data);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   // public async changeUserPassword(data: UserPasswordData) {

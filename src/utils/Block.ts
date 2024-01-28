@@ -28,7 +28,7 @@ class Block {
   protected children: Record<string, Block>;
   private _meta: MetaProps;
   protected props: Props;
-  public state: {};
+  public state: object;
   private eventBus: () => EventBus;
 
   public id: string = nanoid(6);

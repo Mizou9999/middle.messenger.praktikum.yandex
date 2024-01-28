@@ -1,7 +1,7 @@
 import Block from "../../../utils/Block";
 import template from "./ChatContent";
 import "./ChatContent.scss";
-import store from "../../../utils/Store";
+import store, { withStore } from "../../../utils/Store";
 
 interface IChatContentProps {
   [key: string]: unknown;
@@ -11,23 +11,35 @@ interface IChatContentProps {
 }
 
 class ChatContent extends Block {
-  constructor(props: IChatContentProps) {
+  constructor(tagname: string, props: IChatContentProps) {
     super("div", props);
   }
-  render() {
+  private getStateData() {
     const myID = store.getState().user.id;
-    console.log(22, this.props);
-    if (Array.isArray(this.props.activeChatMessages)) {
-      this.props.activeChatMessages = this.props.activeChatMessages.map((message: IChatContentProps) => {
-        if (message.user_id === myID) {
-          message.isMe = true;
-        } else {
-          message.isMe = false;
-        }
-        return message;
-      });
-    }
+    const activeChatID = store.getState().selectedChat;
+    const messages = store.getState().messages || [];
+    const activeChatMessages = Array.isArray(messages[activeChatID]) ? messages[activeChatID] : [];
+
+    return { myID, activeChatID, activeChatMessages };
+  }
+  componentDidMount() {
+    store.on("updated", () => {
+      const { activeChatMessages } = this.getStateData();
+      this.setProps({ activeChatMessages: [...activeChatMessages] });
+    });
+  }
+  render() {
+    const { myID, activeChatMessages } = this.getStateData();
+    this.props.activeChatMessages = activeChatMessages.map((message: IChatContentProps) => {
+      message.isMe = message.user_id === myID;
+      return message;
+    });
+
     return this.compile(template, this.props, "chatContent");
   }
 }
-export default ChatContent;
+export default withStore((state) => ({
+  user: state.user,
+  selectedChat: state.selectedChat,
+  messages: state.messages,
+}))(ChatContent);

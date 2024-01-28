@@ -27,6 +27,9 @@ class Header extends Block {
       }
     }
   }
+  init() {
+    console.log(store);
+  }
   render() {
     const addUser = new Button({
       title: "добавить",

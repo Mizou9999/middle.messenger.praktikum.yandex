@@ -21,7 +21,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    & .title {
+    .title {
       align-self: flex-end;
       font-size: 12px;
       font-weight: bold;
@@ -40,7 +40,7 @@
       color: $primary-color;
     }
   }
-  & .search-container {
+  .search-container {
     width: 100%;
     display: flex;
     align-items: center;
@@ -53,27 +53,27 @@
   .list-container {
     width: 100%;
   }
-  & .chat-card {
+  .chat-card {
     width: 100%;
     display: flex;
 
-    & .user-name {
+    .user-name {
       font-weight: bold;
     }
-    & .last-msg {
+    .last-msg {
       white-space: nowrap;
       overflow: hidden;
       color: $accent-color;
     }
-    & .chat-details {
+    .chat-details {
       display: flex;
       align-items: center;
       flex-direction: column;
       justify-content: center;
-      & .time {
+      .time {
         margin-bottom: 10px;
       }
-      & .unread-msgs {
+      .unread-msgs {
         color: white;
         background-color: $highlight-color;
         padding: 1px 6px;

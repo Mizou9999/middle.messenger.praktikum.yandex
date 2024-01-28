@@ -35,9 +35,13 @@ export class ChatsAPI extends baseAPI {
   }
 
   async getToken(id: number): Promise<string> {
-    const response = await this.http.post<{ token: string }>(`/token/${id}`);
-
-    return response.token;
+    try {
+      const response = await this.http.post<{ token: string }>(`/token/${id}`);
+      return response.token;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
   }
 
   update = undefined;

@@ -14,9 +14,9 @@ class UserController {
       await this.api.changeUserAvatar(avatar);
       await AuthController.fetchUser();
       console.log("avatar changed", store.getState().user);
-
+      store.emit("updated");
       Router.go("/settings");
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
     }
   }
@@ -24,7 +24,7 @@ class UserController {
     try {
       await this.api.changeUserData(data);
       await AuthController.fetchUser();
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
     }
   }

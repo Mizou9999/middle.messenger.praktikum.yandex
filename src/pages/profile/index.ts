@@ -140,8 +140,6 @@ class ProfilePage extends Block {
     AuthController.logout();
   }
   render() {
-    console.log(this.props);
-
     const avatarComponent = new Avatar({
       avatarUrl: store.getState().user?.avatar,
     });

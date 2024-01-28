@@ -6,12 +6,12 @@
   display: flex;
   justify-content: center;
   padding: 0 20px;
-  & ul {
+  ul {
     display: flex;
     align-items: center;
     list-style: none;
 
-    & li {
+    li {
       margin: 0 10px;
       font-size: 16px;
       a {
@@ -49,9 +49,9 @@
     display: flex;
     align-items: center;
     margin-left: 40px;
-    & ul {
+    ul {
       list-style: none;
-      & li {
+      li {
         margin: 15px 0;
         font-size: 20px;
         a {

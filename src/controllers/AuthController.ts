@@ -18,11 +18,15 @@ export class AuthController {
       await this.fetchUser();
       await ChatsController.fetchChats();
       router.go("/messenger");
-    } catch (e: any) {
-      console.error(e);
-      if (e.reason && e.reason === "User already in system") {
-        console.log("already logged");
-        router.go("/messenger");
+    } catch (error: unknown) {
+      if (typeof error === "object" && error !== null && "reason" in error) {
+        console.error(error);
+        if (error.reason === "User already in system") {
+          console.log("already logged");
+          router.go("/messenger");
+        }
+      } else {
+        console.error("An unknown error occurred:", error);
       }
     }
   }
@@ -32,14 +36,18 @@ export class AuthController {
       await this.api.signup(data);
       await this.fetchUser();
       router.go("/messenger");
-    } catch (e: any) {
-      console.error(e.message);
+    } catch (e: unknown) {
+      console.error(e);
     }
   }
 
   async fetchUser() {
-    const user = await this.api.read();
-    store.set("user", user);
+    try {
+      const user = await this.api.read();
+      store.set("user", user);
+    } catch (e: unknown) {
+      console.error(e);
+    }
   }
 
   async logout() {
@@ -47,8 +55,8 @@ export class AuthController {
       MessagesController.closeAll();
       await this.api.logout();
       router.go("/");
-    } catch (e: any) {
-      console.error(e.message);
+    } catch (e: unknown) {
+      console.error(e);
     }
   }
 }
