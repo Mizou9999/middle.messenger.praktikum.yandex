@@ -1,49 +1,42 @@
 import Block from "../../../../utils/Block";
 import template from "./Chatlist";
-import ChatComponent from "../../../../components/chat/chatCard";
+import ChatCard, { IChatProps } from "../../../../components/chat/chatCard";
+import store, { withStore } from "../../../../utils/Store";
+import "./Chatlist.scss";
 
 interface IChatListProps {
   [key: string]: unknown;
-  // Currently empty, can be expanded in the future if needed
 }
 
 class ChatList extends Block {
-  constructor(props: IChatListProps) {
-    super("div", props);
+  constructor(tagname: string, props: IChatListProps) {
+    super((tagname = "div"), props);
   }
 
   render() {
-    const chat1 = new ChatComponent({
-      img: "https://source.unsplash.com/128x128/?person",
-      date: "12:09",
-      is_active: false,
-      new_msgs: 0,
-      user_name: "John",
-      last_msg: "Hello there!",
+    this.children.chatList = store.getState().chats.map((chat: IChatProps) => {
+      const lastMessageContent = chat.last_message ? chat.last_message.content : "";
+      return new ChatCard({
+        avatar: chat.avatar || "https://source.unsplash.com/128x128/?random",
+        created_by: chat.created_by,
+        id: chat.id,
+        lastMessage: lastMessageContent,
+        title: chat.title,
+        unread_count: chat.unread_count,
+        events: {
+          click: () => {
+            store.set("selectedChat", chat.id);
+          },
+        },
+      });
     });
-    const chat2 = new ChatComponent({
-      img: "https://source.unsplash.com/128x128/?portrait",
-      date: " 10:09",
-      is_active: true,
-      new_msgs: 5,
-      user_name: "Alice",
-      last_msg: "How are you doing?",
-    });
-    const chat3 = new ChatComponent({
-      img: "https://source.unsplash.com/128x128/?man",
-      date: "Пт",
-      is_active: false,
-      new_msgs: 0,
-      user_name: "Bob",
-      last_msg: "Lorem ipsum dolor sit amet.",
-    });
-
-    this.children = {
-      chat1: chat1,
-      chat2: chat2,
-      chat3: chat3,
-    };
     return this.compile(template, this.props, "list-container");
   }
 }
-export default ChatList;
+export default withStore((state) => ({
+  chats: [...(state.chats || [])],
+  selectedChat: state.selectedChat,
+}))(ChatList);
+// test99@gmail.com
+// Login: Test99
+// Password: Test99Test99

@@ -12,7 +12,7 @@ export default `
 
     <div class="content__login-form__buttons-container">
       {{{button}}} 
-      <p><a href="/login">Войти</a></p>
+      <p><a href="/sign-in">Войти</a></p>
     </div>
   </form>
 </div>

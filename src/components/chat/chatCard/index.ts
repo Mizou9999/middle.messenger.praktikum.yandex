@@ -1,14 +1,15 @@
 import Block from "../../../utils/Block";
 import template from "./Chat";
 import "./Chat.scss";
-
-interface IChatProps {
+import { IChatMessage } from "../../../types/types";
+export interface IChatProps {
   [key: string]: unknown;
-  img: string;
-  user_name: string;
-  last_msg: string;
-  date: string;
-  new_msgs?: number;
+  avatar: string;
+  created_by: string;
+  id: string;
+  last_message?: IChatMessage;
+  title: string;
+  unread_count: number | 0;
 }
 
 class Chat extends Block {

@@ -28,7 +28,7 @@ class Block {
   protected children: Record<string, Block>;
   private _meta: MetaProps;
   protected props: Props;
-  public state: { [key: string]: unknown };
+  public state: object;
   private eventBus: () => EventBus;
 
   public id: string = nanoid(6);
@@ -144,26 +144,37 @@ class Block {
     }
   }
   protected compile(template: string, props: Props, className?: string) {
-    const propsAndStubs = { ...props };
+    const propsAndStubs = { ...props, ...this.children };
 
     Object.entries(this.children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
+      if (Array.isArray(child)) {
+        propsAndStubs[key] = child.map((item) => `<div data-id="${item.id}"></div>`);
+      } else {
+        propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
+      }
     });
+
     this.setClassName(className);
+
     const fragment = this._createDocumentElement("template") as HTMLTemplateElement;
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
 
     Object.values(this.children).forEach((child) => {
-      const content = fragment.content;
-      const stub = content.querySelector(`[data-id="${child.id}"]`);
-      const el = child.getContent();
+      const replaceChildContent = (childContent: Block) => {
+        const content = fragment.content;
+        const stub = content.querySelector(`[data-id="${childContent.id}"]`);
 
-      if (!stub) {
-        return;
-      }
+        const el = childContent.getContent();
 
-      if (el) {
-        stub.replaceWith(el);
+        if (stub && el) {
+          stub.replaceWith(el);
+        }
+      };
+
+      if (Array.isArray(child)) {
+        child.forEach(replaceChildContent);
+      } else {
+        replaceChildContent(child);
       }
     });
 

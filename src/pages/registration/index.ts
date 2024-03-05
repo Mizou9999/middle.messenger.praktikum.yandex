@@ -4,6 +4,8 @@ import "../login/login.scss";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { validateLogin, validatePassword, validateEmail, validateName, validatePhone, doesPasswordMatch } from "../../utils/validationutils";
+import AuthController from "../../controllers/AuthController";
+import { SignupData } from "../../types/types";
 
 interface LoginPageProps {
   title: string;
@@ -28,9 +30,9 @@ class RegistrationPage extends Block {
           });
 
           if (isFormValid) {
-            console.log("final login data", this.state);
+            AuthController.signup(this.state as SignupData);
           } else {
-            console.log("Error login", this.state);
+            console.log("Error Registration", this.state);
           }
         },
       },

@@ -7,23 +7,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  &__avatar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    cursor: pointer;
-    p {
-      font-size: 18px;
-      font-weight: normal;
-      cursor: pointer;
-      a {
-        text-decoration: none;
-        color: $primary-color;
-      }
-    }
-  }
+
   &__settings-form {
     color: $primary-color;
     display: flex;
@@ -56,11 +40,15 @@
           color: $primary-color;
         }
       }
-      .logout-btn {
-        a {
-          text-decoration: none;
-          color: $highlight-color;
-        }
+      .button-submit {
+        margin-bottom: 10px;
+      }
+      .logout {
+        background-color: $highlight-color;
+        color: $white-color;
+      }
+      .back {
+        margin-bottom: 20px;
       }
     }
   }

@@ -17,14 +17,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  & .title {
-    align-self: flex-end;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 23px;
-    cursor: pointer;
+  .header-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .title {
+      align-self: flex-end;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 23px;
+      cursor: pointer;
+      margin-bottom: 22px;
+    }
+    .logout {
+      color: $highlight-color;
+      cursor: pointer;
+      background: none;
+    }
+    .profile {
+      background: none;
+      cursor: pointer;
+      color: $primary-color;
+    }
   }
-  & .search-container {
+  .search-container {
     width: 100%;
     display: flex;
     align-items: center;
@@ -37,27 +53,27 @@
   .list-container {
     width: 100%;
   }
-  & .chat-card {
+  .chat-card {
     width: 100%;
     display: flex;
 
-    & .user-name {
+    .user-name {
       font-weight: bold;
     }
-    & .last-msg {
+    .last-msg {
       white-space: nowrap;
       overflow: hidden;
       color: $accent-color;
     }
-    & .chat-details {
+    .chat-details {
       display: flex;
       align-items: center;
       flex-direction: column;
       justify-content: center;
-      & .time {
+      .time {
         margin-bottom: 10px;
       }
-      & .unread-msgs {
+      .unread-msgs {
         color: white;
         background-color: $highlight-color;
         padding: 1px 6px;
@@ -74,8 +90,9 @@
   flex-direction: column;
   position: relative;
 }
+
 .hidden {
-  width: 100%;
+  width: 300px;
   height: 80%;
   display: flex;
   align-items: center;
@@ -115,4 +132,12 @@
   height: 1px;
   background-color: #999999;
   margin-bottom: 20px;
+}
+.chat-create-button {
+  margin-bottom: 12px;
+}
+#chatRoomName {
+  margin-bottom: 12px;
+  position: absolute;
+  top: 0;
 }

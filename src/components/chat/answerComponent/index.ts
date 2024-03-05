@@ -2,6 +2,8 @@ import Block from "../../../utils/Block";
 import template from "./AnswerComponent";
 import "./AnswerComponent.scss";
 import button from "../../Button";
+import MessagesController from "../../../controllers/MessagesController";
+import store, { withStore } from "../../../utils/Store";
 
 interface IAnswerComponentProps {
   [key: string]: unknown;
@@ -10,7 +12,7 @@ interface IAnswerComponentProps {
   errorMessage?: string;
 }
 class AnswerComponent extends Block {
-  constructor(props: IAnswerComponentProps) {
+  constructor(tagename: string, props: IAnswerComponentProps) {
     super("div", props);
   }
   render() {
@@ -30,7 +32,8 @@ class AnswerComponent extends Block {
           }
           this.setProps({ errorMessage: "" });
           message.classList.remove("error_message");
-          console.log("send Message: ", messageText);
+          const selectedChat = store.getState().selectedChat;
+          MessagesController.sendMessage(selectedChat, messageText);
         },
       },
     });
@@ -40,4 +43,8 @@ class AnswerComponent extends Block {
     return this.compile(template, this.props, "answer-component");
   }
 }
-export default AnswerComponent;
+export default withStore((state) => ({
+  user: state.user,
+  selectedChat: state.selectedChat,
+  messages: state.messages,
+}))(AnswerComponent);

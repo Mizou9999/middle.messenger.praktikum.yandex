@@ -2,52 +2,115 @@ import Block from "../../utils/Block";
 import template from "./Chat";
 import "./chat.scss";
 import ChatListComponent from "./components/chatList";
+import CreateRoom from "./components/createRoom";
 import ChatHeaderComponent from "../../components/chat/header";
 import ChatContentComponent from "../../components/chat/chatContent";
 import AnswerComponent from "../../components/chat/answerComponent";
+import Button from "../../components/Button";
+import store, { withStore } from "../../utils/Store";
+
+import router from "../../router/router";
 
 interface IChatProps {
   [key: string]: unknown;
-  img: string;
-  user_name: string;
-  last_msg: string;
-  new_msgs: number;
-  date: string;
-  events: {
-    click: () => void;
-  };
+  title: string;
+  last_message: object;
 }
 
 class ChatPage extends Block {
-  constructor(props: IChatProps) {
+  private _isCreateRoomVisible: boolean;
+  constructor(tagname: string, props: IChatProps) {
     super("div", props);
+    this._isCreateRoomVisible = false;
+  }
+  createRoomVisible(visible: boolean) {
+    this._isCreateRoomVisible = visible;
+    this.setProps({});
+  }
+
+  handleCreateRoom() {
+    const createRoom = new CreateRoom({
+      class: "create-room",
+      title: "Создать чат",
+      inputPlaceholder: "Название чата",
+      onClose: () => {
+        this.createRoomVisible(false);
+      },
+    });
+    return createRoom;
   }
 
   render() {
     const chatList = new ChatListComponent({ props: this.props });
-    const chatHeader = new ChatHeaderComponent({ user_name: "Pavel", img: "https://source.unsplash.com/128x128/?car" });
-    const chatContent1 = new ChatContentComponent({
-      msg_start_date: "19 июня",
-      msg_content: "Привет!!! Смотри, тут всплыл интересный кусок лунной космической истории, а я уже устал искать. Ну, пока что, спасибо, пожалуйста!, я уже устал искать. Ну, пока что, спасибо, пожалуйста!",
+
+    const profileBtn = new Button({
+      title: "Профиль",
+      class: "profile",
+      type: "submit",
+      events: {
+        click: () => {
+          // go to profile page
+          router.go("/settings");
+        },
+      },
     });
-    const chatContent2 = new ChatContentComponent({
-      msg_start_date: "22 июня",
-      msg_content: "Вот это кусок лунной космической истории. Очень круто! Ну, пока что, спасибо, пожалуйста!, если ты заинтересовался моим хобби, то тогда можешь посмотреть мою страничку в инстаграме - @meow_>cat ",
+    const activeChatID = store.getState().selectedChat;
+    const activeChat = store.getState().chats.find((chat: IChatProps) => chat.id === activeChatID);
+    let chatHeader;
+    let chatContentComponent;
+
+    // save current chat id in store
+    store.set("selectedChat", activeChatID);
+    // set default chatContent and headers ( если пусто)
+
+    chatHeader = new ChatHeaderComponent({ chat_room_title: "Empty Room", img: "https://source.unsplash.com/128x128/?car" });
+    chatContentComponent = new ChatContentComponent({
+      time: "",
+      msg_content: "Select or create a new chat",
     });
+    if (activeChat) {
+      chatHeader = new ChatHeaderComponent({ chat_room_title: activeChat.title, img: "https://source.unsplash.com/128x128/?car" });
+      if (activeChat.last_message) {
+        chatContentComponent = new ChatContentComponent({
+          time: new Date(activeChat.last_message.time).toLocaleString(),
+          msg_content: activeChat.title,
+        });
+      }
+    }
+
     const answerContent = new AnswerComponent({
       class: "answer-component__upload",
       inputPlaceholder: "Напишите ваше сообщение...",
     });
+
+    const createRoom = this.handleCreateRoom();
+    const createButton = new Button({
+      title: this._isCreateRoomVisible ? "Скрыть Чат" : "Создать Чат",
+      class: "chat-create-button",
+      type: "submit",
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          this.createRoomVisible(!this._isCreateRoomVisible);
+        },
+      },
+    });
+    this._isCreateRoomVisible ? createRoom.show() : createRoom.hide();
     this.children = {
       chatList: chatList,
       chatHeader: chatHeader,
-      chatContent1: chatContent1,
-      chatContent2: chatContent2,
+      chatContent: chatContentComponent,
       answerContent: answerContent,
+      createButton: createButton,
+      createRoom: createRoom,
+      profileBtn: profileBtn,
     };
 
     return this.compile(template, this.props, "page-container");
   }
 }
 
-export default ChatPage;
+export default withStore((state) => ({
+  chats: [...(state.chats || [])],
+  selectedChat: state.selectedChat,
+}))(ChatPage);

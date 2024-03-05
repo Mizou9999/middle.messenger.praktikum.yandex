@@ -22,7 +22,8 @@ class EventBus {
   emit(eventName: string, ...args: any[]): void {
     const eventListeners = this.listeners[eventName];
     if (!eventListeners) {
-      throw new Error(`No events with this name: ${eventName}`);
+      // throw new Error(`No events with this name: ${eventName}`);
+      return;
     }
 
     eventListeners.forEach((listener) => listener(...args));
