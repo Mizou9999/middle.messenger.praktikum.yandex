@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Run ESLint
+npm run lint:eslint
+
+# Run Stylelint
+npm run lint:stylelint
+
+# Run tests
+npm test

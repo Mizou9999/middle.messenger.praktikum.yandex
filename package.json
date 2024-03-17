@@ -11,18 +11,31 @@
     "lint:eslint": "eslint src",
     "lint:stylelint": "stylelint \"src/**/*.scss\"",
     "lint:fix": "eslint --fix --ext .ts,.tsx .",
-    "lint:tsc": "npx tsc --noEmit"
+    "lint:tsc": "npx tsc --noEmit",
+    "test": "mocha ",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.12",
+    "@types/jsdom": "^21.1.6",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.24",
+    "@types/sinon": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
+    "chai": "^5.1.0",
     "eslint": "^8.56.0",
     "eslint-plugin-node": "^11.1.0",
+    "husky": "^9.0.11",
+    "jsdom": "^24.0.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^10.3.0",
     "postcss-import": "^15.1.0",
     "sass": "^1.69.5",
     "sass-loader": "^13.3.2",
     "stylelint": "^16.2.0",
     "stylelint-scss": "^6.1.0",
+    "ts-node": "^10.9.2",
     "vite": "^5.0.0",
     "vite-plugin-handlebars": "^1.6.0"
   },
@@ -31,6 +44,7 @@
     "express": "^4.18.2",
     "handlebars": "^4.7.8",
     "nanoid": "^5.0.4",
+    "sinon": "^17.0.1",
     "uuid": "^9.0.1"
   }
 }
