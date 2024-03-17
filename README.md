@@ -16,6 +16,10 @@
 
 `npm run start`
 
+### Run Tests
+
+`npm run test`
+
 ### Built With
 
 - **TypeScript**: Used for static type checking, which helps in catching errors early during development.
@@ -23,6 +27,8 @@
 - **Stylelint**: help avoid errors and enforce conventions in stylesheets.
 - **WebSocket**: used for communication with the server and client in realtime
 - **Router**: used for navigation between different components
+- **Husky**: used for pre-committing
+- **Mocha**: used for testing
 
 ## Design
 

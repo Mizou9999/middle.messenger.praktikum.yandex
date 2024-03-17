@@ -1,4 +1,10 @@
-#!/bin/bash
+#!/bin/sh
+
+# Run ESLint
+npm run lint:eslint
+
+# Run Stylelint
+npm run lint:stylelint
+
+# Run tests
 npm test
-npm run lint
-npm run stylelint
